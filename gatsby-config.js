@@ -11,7 +11,7 @@ const client = contentful.createClient({
 
 module.exports = client.getEntries().then(entries => {
   const aboutEntry = entries.items.find(
-    entry => entry.sys.contentType.sys.id === 'about',
+    entry => entry.sys.contentType.sys.id === 'about'
   );
 
   const about = aboutEntry.fields;
