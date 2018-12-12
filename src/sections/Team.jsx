@@ -66,7 +66,7 @@ const edgeToArray = data => data.edges.map(edge => edge.node);
 
 const TeamMembers = () => (
   <Section.Container showInMenu={false} Background={Background} fillHeight={false}>
-    <Section.Header name="Team Members" icon="" label="Team Members" />
+    <Section.Header name="The Team" icon="" label="The Team" />
     <Flex>
       {teamInfo.map(member => (
         <TeamMember width={[ 1/4, 1/4, 1 ]}>
