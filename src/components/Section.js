@@ -8,7 +8,7 @@ import Slide from 'react-reveal/Slide';
 const SectionContainer = styled.div`
   min-height: ${props => props.fillHeight ? '100vh' : 'auto'};
   min-width: 320px;
-  max-width: 1366px;
+  max-width: 1200px;
   display: flex;
   margin: auto;
   flex: 0 1 auto;
