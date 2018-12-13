@@ -14,6 +14,7 @@ const TeamMember = styled(Box)`
   transition: all 0.25s;
   top: 0;
   color: white;
+  padding: 20px;
 
   &:hover {
     top: -10px;

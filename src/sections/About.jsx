@@ -3,6 +3,7 @@ import { Box, Image, Flex } from 'rebass';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
+import YouTube from 'react-youtube';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
 import Triangle from '../components/Triangle';
@@ -34,6 +35,14 @@ const Background = () => (
   </div>
 );
 
+const youtubeOpts = {
+  height: '390',
+  width: '100%',
+  playerVars: { // https://developers.google.com/youtube/player_parameters
+    autoplay: 1
+  }
+};
+
 const ProfilePicture = styled(Image)`
   border-radius: 50%;
   transition: all 0.25s ease-out;
@@ -61,14 +70,18 @@ const About = () => (
                 src
               }
             }
+            videoYouTubeId
           }
         }
       `}
       render={data => {
-        const { aboutMe, profile } = data.contentfulAbout;
+        const { aboutMe, profile, videoYouTubeId } = data.contentfulAbout;
         return (
           <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-            <Box width={[1, 1, 4 / 6]} px={[1, 2, 4]}>
+            
+            
+
+            <Box width={[1, 1, 3 / 6]} px={[1, 2, 4]}>
               <Fade bottom>
                 <ReactMarkdown
                   source={aboutMe.childMarkdownRemark.rawMarkdownBody}
@@ -77,17 +90,20 @@ const About = () => (
               </Fade>
             </Box>
 
-            <Box
-              width={[1, 1, 2 / 6]}
-              css={{ maxWidth: '300px', margin: 'auto' }}
-            >
+            <Box width={[1, 1, 3 / 6]}>
               <Fade right>
+                <YouTube
+                  videoId={videoYouTubeId}
+                  opts={youtubeOpts}
+                />
+                {/*
                 <ProfilePicture
                   src={profile.image.src}
                   alt={profile.title}
                   mt={[4, 4, 0]}
                   ml={[0, 0, 1]}
                 />
+                */}
               </Fade>
             </Box>
           </Flex>

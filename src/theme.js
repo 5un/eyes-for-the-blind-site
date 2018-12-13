@@ -15,8 +15,14 @@ const colors = {
   secondaryLight: '#00B1FF',
   // secondaryDark: '#c60055',
   secondaryDark: '#00B1FF',
+  
+
 };
 
 module.exports = {
   colors,
+  fonts: {
+    sans: '\'Work Sans\', sans-serif',
+    mono: '\'Work Sans\', sans-serif',
+  },
 };

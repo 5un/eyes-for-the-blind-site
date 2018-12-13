@@ -21,6 +21,7 @@ const Partner = styled(Box)`
     top: -10px;
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
   }
+  
 `;
 
 const partners = [

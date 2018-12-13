@@ -3,11 +3,14 @@ import { StaticQuery, graphql } from 'gatsby';
 import { Heading, Flex, Label } from 'rebass';
 import styled from 'styled-components';
 import TextLoop from 'react-text-loop';
+import ReactMarkdown from 'react-markdown';
+import Button from '../components/Button';
 import Section from '../components/Section';
 import SocialLink from '../components/SocialLink';
 import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
-import SoundBeaconBackground from '../components/SoundBeaconBackground'
+import SoundBeaconBackground from '../components/SoundBeaconBackground';
+import titleMarkdownRenderer from '../components/TitleMarkdownRenderer';
 
 /*
 const SoundBeaconBackground = styled.div`
@@ -61,6 +64,11 @@ const LandingPage = () => (
           contentfulAbout {
             name
             roles
+            formattedName {
+              childMarkdownRemark {
+                rawMarkdownBody
+              }
+            }
             socialLinks {
               id
               url
@@ -71,7 +79,7 @@ const LandingPage = () => (
         }
       `}
       render={data => {
-        const { name, socialLinks, roles } = data.contentfulAbout;
+        const { name, formattedName, socialLinks, roles } = data.contentfulAbout;
 
         return (
           <Fragment>
@@ -79,12 +87,17 @@ const LandingPage = () => (
               textAlign="left"
               is="h1"
               color="primary"
-              fontSize={[5, 6, 8]}
+              fontSize={[7, 7, 8]}
+              fontFamily= 'Work Sans'
               mb={[3, 4, 5]}
             >
-              {`${name}`}
+              <ReactMarkdown
+                source={formattedName.childMarkdownRemark.rawMarkdownBody}
+                renderers={titleMarkdownRenderer}
+              />
             </Heading>
 
+            {/*
             <Heading
               is="h2"
               color="primary"
@@ -92,7 +105,6 @@ const LandingPage = () => (
               mb={[2, 4]}
               textAlign="center"
             >
-              {/*
               <TextLoop>
                 {roles.map(text => (
                   <p style={{ width: 400 }} key={text}>
@@ -100,8 +112,16 @@ const LandingPage = () => (
                   </p>
                 ))}
               </TextLoop>
-              */}
             </Heading>
+            */}
+
+            <Button 
+              bg='#00B1FF'
+              fontSize={[4, 4, 4]}
+              borderRadius={100}
+              style={{ width: '240px' }}>
+              See Demo
+            </Button>
             
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
               {/* socialLinks.map(({ id, ...rest }) => (
