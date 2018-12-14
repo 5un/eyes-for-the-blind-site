@@ -1,26 +1,20 @@
 import React from 'react';
-import { Subhead, Image, Text, Flex, Label } from 'rebass';
+import { Subhead, Image, Text, Flex, Label, Heading } from 'rebass';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import Section from '../components/Section';
+import ReactMarkdown from 'react-markdown';
 import { CardContainer, Card } from '../components/Card';
 import SocialLink from '../components/SocialLink';
 import Triangle from '../components/Triangle';
 import ImageSubtitle from '../components/ImageSubtitle';
+import markdownRenderer from '../components/MarkdownRenderer';
 
 const Background = () => (
   <div>
   </div>
 );
-
-const Title = styled(Subhead)`
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  display: table;
-  border-bottom: ${props => props.theme.colors.primary} 5px solid;
-`;
 
 const TextContainer = styled.div`
   display: flex;
@@ -33,119 +27,66 @@ const TextContainer = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
-  width: 100px;
-  margin: auto;
 
-  @media (min-width: 400px) {
-    width: 200px;
-  }
+const CoverImage = styled.img`
+  width: 100%;
+  object-fit: cover;
 `;
 
-const ProjectImage = styled(Image)`
-  padding: 10px;
-  margin-top: 50px;
-  height: 100px !important;
-  width: 100px;
-
-  @media (min-width: 400px) {
-    width: 200px;
-    padding: 40px;
-    height: 200px !important;
-    margin-top: 0px;
-  }
+const EllipsisHeading = styled(Heading)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-inline-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  /*
+    border-bottom: ${props => props.theme.colors.primary} 5px solid;
+  */
 `;
 
-const SocialLinksContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  float: right;
-  padding: 2px;
-  top: -220px;
-
-  @media (min-width: 400px) {
-    top: -237px;
-  }
-`;
-
-const Project = ({
-  name,
-  description,
-  projectUrl,
-  repositoryUrl,
-  type,
-  publishedDate,
-  logo,
-}) => (
-  <Card p={0}>
-    <Flex css={{ height: '200px' }}>
-      <TextContainer>
-        <span>
-          <Title my={2} pb={1}>
-            {name}
-          </Title>
-        </span>
-        <Text width="100%" css={{ overflow: 'auto' }}>
-          {description}
-        </Text>
-      </TextContainer>
-      <ImageContainer>
-        <ProjectImage src={logo.image.src} alt={logo.title} />
-        <ImageSubtitle bg="primaryLight" color="white" top="13px" top-s="-37px">
-          {type}
+const BlogPost = ({ name, body, image, externalLinkUrl, publishedDate }) => {
+  // const timestamp = `${date} - ${Math.ceil(time)} min`;
+  return (
+    <Card
+      onClick={() => window.open(url, '_blank')}
+      css={{ cursor: 'pointer' }}
+      p={0}
+    >
+      <EllipsisHeading m={3} p={1}>
+        {name}
+      </EllipsisHeading>
+      {image && <CoverImage src={image.image.src} height="200px" alt={name} />}
+      <Text m={3}>
+        <ReactMarkdown
+          source={body.childMarkdownRemark.rawMarkdownBody}
+          renderers={markdownRenderer}
+        />
+      </Text>
+      {/*
+        <ImageSubtitle bg="primaryLight" color="white">
+          {timestamp}
         </ImageSubtitle>
-        <ImageSubtitle
-          bg="backgroundDark"
-          invert="true"
-          top-s="-200px"
-          top="-227px"
-        >
-          {publishedDate}
-        </ImageSubtitle>
-        <SocialLinksContainer>
-          <Label mx={1} fontSize={5}>
-            <SocialLink
-              color="primary"
-              hoverColor="primaryLight"
-              name="Check repository"
-              fontAwesomeIcon="github"
-              url={repositoryUrl}
-            />
-          </Label>
-          <Label mx={1} fontSize={5}>
-            <SocialLink
-              color="primary"
-              hoverColor="primaryLight"
-              fontSize={5}
-              mx={1}
-              name="See project"
-              fontAwesomeIcon="globe"
-              url={projectUrl}
-            />
-          </Label>
-        </SocialLinksContainer>
-      </ImageContainer>
-    </Flex>
-  </Card>
-);
+      */}
+    </Card>
+  );
+};
 
 const Updates = () => (
   <Section.Container id="updates" Background={Background}>
     <Section.Header name="Updates" icon="" label="notebook" />
     <StaticQuery
       query={graphql`
-        query ProjectsQuery {
+        query BlogPostQuery {
           contentfulAbout {
-            projects {
-              id
+            updates {
               name
-              description
-              projectUrl
-              repositoryUrl
+              body {
+                childMarkdownRemark {
+                  rawMarkdownBody
+                }
+              }
               publishedDate(formatString: "YYYY")
-              type
-              logo {
+              image {
                 title
                 image: resize(width: 200, quality: 100) {
                   src
@@ -157,9 +98,9 @@ const Updates = () => (
       `}
       render={({ contentfulAbout }) => (
         <CardContainer minWidth="350px">
-          {contentfulAbout.projects.map((p, i) => (
+          {contentfulAbout.updates.map((p, i) => (
             <Fade bottom delay={i * 200}>
-              <Project key={p.id} {...p} />
+              <BlogPost key={p.id} {...p} />
             </Fade>
           ))}
         </CardContainer>
