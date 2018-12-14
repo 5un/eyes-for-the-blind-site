@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/EmaSuriano/gatsby-starter-mate#readme",
   "dependencies": {
+    "@rebass/grid": "^6.0.0-7",
     "babel-plugin-styled-components": "^1.7.1",
     "chalk": "^2.4.1",
     "clean-dir": "^1.0.3",

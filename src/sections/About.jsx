@@ -54,12 +54,17 @@ const ProfilePicture = styled(Image)`
 
 const About = () => (
   <Section.Container id="about" Background={Background}>
-    <Section.Header name="The Project" icon="" label="person" />
     <StaticQuery
       query={graphql`
         query AboutMeQuery {
           contentfulAbout {
+            aboutSectionTitle
             aboutMe {
+              childMarkdownRemark {
+                rawMarkdownBody
+              }
+            }
+            extendedAboutContent {
               childMarkdownRemark {
                 rawMarkdownBody
               }
@@ -75,38 +80,42 @@ const About = () => (
         }
       `}
       render={data => {
-        const { aboutMe, profile, videoYouTubeId } = data.contentfulAbout;
+        const { aboutMe, aboutSectionTitle, extendedAboutContent, profile, videoYouTubeId } = data.contentfulAbout;
         return (
-          <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-            
-            
+          <React.Fragment>
+            <Section.Header name={aboutSectionTitle} icon="" label="person" />
+            <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+              <Box width={[1, 1, 3 / 6]} px={[1, 2, 4]}>
+                <Fade bottom>
+                  <ReactMarkdown
+                    source={aboutMe.childMarkdownRemark.rawMarkdownBody}
+                    renderers={markdownRenderer}
+                  />
+                </Fade>
+              </Box>
 
-            <Box width={[1, 1, 3 / 6]} px={[1, 2, 4]}>
-              <Fade bottom>
-                <ReactMarkdown
-                  source={aboutMe.childMarkdownRemark.rawMarkdownBody}
-                  renderers={markdownRenderer}
-                />
-              </Fade>
-            </Box>
-
-            <Box width={[1, 1, 3 / 6]}>
-              <Fade right>
-                <YouTube
-                  videoId={videoYouTubeId}
-                  opts={youtubeOpts}
-                />
-                {/*
-                <ProfilePicture
-                  src={profile.image.src}
-                  alt={profile.title}
-                  mt={[4, 4, 0]}
-                  ml={[0, 0, 1]}
-                />
-                */}
-              </Fade>
-            </Box>
-          </Flex>
+              <Box width={[1, 1, 3 / 6]}>
+                <Fade right>
+                  <YouTube
+                    videoId={videoYouTubeId}
+                    opts={youtubeOpts}
+                  />
+                  {/*
+                  <ProfilePicture
+                    src={profile.image.src}
+                    alt={profile.title}
+                    mt={[4, 4, 0]}
+                    ml={[0, 0, 1]}
+                  />
+                  */}
+                </Fade>
+              </Box>
+            </Flex>
+            <ReactMarkdown
+              source={extendedAboutContent.childMarkdownRemark.rawMarkdownBody}
+              renderers={markdownRenderer}
+            />
+          </React.Fragment>
         );
       }}
     />

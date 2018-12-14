@@ -120,7 +120,7 @@ const LandingPage = () => (
               fontSize={[4, 4, 4]}
               borderRadius={100}
               style={{ width: '240px' }}>
-              See Demo
+              Learn More
             </Button>
             
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">

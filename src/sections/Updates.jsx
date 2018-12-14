@@ -11,34 +11,6 @@ import ImageSubtitle from '../components/ImageSubtitle';
 
 const Background = () => (
   <div>
-    <Triangle
-      color="secondaryLight"
-      height={['80vh', '80vh']}
-      width={['100vw', '100vw']}
-      invertX
-    />
-
-    <Triangle
-      color="background"
-      height={['50vh', '20vh']}
-      width={['50vw', '50vw']}
-      invertX
-    />
-
-    <Triangle
-      color="primaryDark"
-      height={['25vh', '40vh']}
-      width={['75vw', '60vw']}
-      invertX
-      invertY
-    />
-
-    <Triangle
-      color="backgroundDark"
-      height={['25vh', '20vh']}
-      width={['100vw', '100vw']}
-      invertY
-    />
   </div>
 );
 
@@ -158,9 +130,9 @@ const Project = ({
   </Card>
 );
 
-const Projects = () => (
-  <Section.Container id="projects" Background={Background}>
-    <Section.Header name="Projects" icon="💻" label="notebook" />
+const Updates = () => (
+  <Section.Container id="updates" Background={Background}>
+    <Section.Header name="Updates" icon="" label="notebook" />
     <StaticQuery
       query={graphql`
         query ProjectsQuery {
@@ -196,4 +168,4 @@ const Projects = () => (
   </Section.Container>
 );
 
-export default Projects;
+export default Updates;
