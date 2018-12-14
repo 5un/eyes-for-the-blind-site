@@ -12,12 +12,14 @@ import markdownRenderer from '../components/MarkdownRenderer';
 
 const Partner = styled(Box)`
   position: relative;
+  display: inline-block;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.25s;
   top: 0;
   color: white;
   text-align: center;
   padding: 1em;
+  vertical-align: middle;
 
   &:hover {
     top: -10px;
@@ -82,13 +84,13 @@ const Partners = () => (
             source={contentfulAbout.partnerSectionText.childMarkdownRemark.rawMarkdownBody}
             renderers={markdownRenderer}
           />
-          <Flex>
+          <div>
             {contentfulAbout.partners.map(partner => (
-              <Partner width={[ 1/3, 1/3, 1 ]} key={partner.name}>
+              <Partner width={[ 1, 1, 1/3 ]} key={partner.name}>
                 <a href={partner.linkUrl}><img src={partner.logo.image.src} style={{ maxWidth: '300px', maxHeight: '120px' }}/></a>
               </Partner>
             ))}
-          </Flex>
+          </div>
         </React.Fragment>
       )}
     />

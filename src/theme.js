@@ -25,4 +25,5 @@ module.exports = {
     sans: '\'Work Sans\', sans-serif',
     mono: '\'Work Sans\', sans-serif',
   },
+  breakpoints: [ '32em', '48em', '64em' ]
 };

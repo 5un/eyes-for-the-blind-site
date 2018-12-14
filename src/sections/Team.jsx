@@ -1,5 +1,6 @@
 import React from 'react';
-import { Heading, Text, Flex, Box, Image } from 'rebass';
+import { Heading, Text, Image } from 'rebass';
+import { Flex, Box } from '@rebass/grid'
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
@@ -11,6 +12,7 @@ import ImageSubtitle from '../components/ImageSubtitle';
 import markdownRenderer from '../components/MarkdownRenderer';
 
 const TeamMember = styled(Box)`
+  display: inline-block;
   position: relative;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
   transition: all 0.25s;
@@ -18,6 +20,7 @@ const TeamMember = styled(Box)`
   color: white;
   padding: 20px;
   text-align: center;
+  vertical-align: top;
 
   &:hover {
     top: -10px;
@@ -66,9 +69,9 @@ const TeamMembers = () => (
             source={contentfulAbout.teamSectionText.childMarkdownRemark.rawMarkdownBody}
             renderers={markdownRenderer}
           />
-          <Flex>
+          <Box>
             {contentfulAbout.teamMembers.map(member => (
-              <TeamMember width={[ 1, 1, 1 ]}>
+              <TeamMember width={[1, 1/3, 1/6]}>
                 <Image src={member.image.image.src} width="200px" height="auto" style={{ borderRadius: '100px', margin: 'auto' }}/>
                 <div style={{ textAlign: 'center' }}>
                   <h3>{member.name}</h3>
@@ -79,7 +82,7 @@ const TeamMembers = () => (
               </TeamMember>
             ))}
             
-          </Flex>
+          </Box>
         </React.Fragment>
       )}
     />
