@@ -5,7 +5,7 @@ import About from '../sections/About';
 import Updates from '../sections/Updates';
 import Team from '../sections/Team';
 import Partners from '../sections/Partners';
-import Writing from '../sections/Writing';
+import Contact from '../sections/Contact'
 
 const IndexPage = () => (
   <Layout>
@@ -14,9 +14,7 @@ const IndexPage = () => (
     <Team />
     <Partners />
     <Updates />
-    {/*
-    <Writing />
-    */}
+    <Contact />
   </Layout>
 );
 
