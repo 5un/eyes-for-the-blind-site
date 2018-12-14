@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import { Heading, Flex, Label } from 'rebass';
 import styled from 'styled-components';
 import TextLoop from 'react-text-loop';
+import { SectionLink } from 'react-scroll-section';
 import ReactMarkdown from 'react-markdown';
 import Button from '../components/Button';
 import Section from '../components/Section';
@@ -11,6 +12,7 @@ import MouseIcon from '../components/MouseIcon';
 import Triangle from '../components/Triangle';
 import SoundBeaconBackground from '../components/SoundBeaconBackground';
 import titleMarkdownRenderer from '../components/TitleMarkdownRenderer';
+
 
 /*
 const SoundBeaconBackground = styled.div`
@@ -115,13 +117,19 @@ const LandingPage = () => (
             </Heading>
             */}
 
-            <Button 
-              bg='#00B1FF'
-              fontSize={[4, 4, 4]}
-              borderRadius={100}
-              style={{ width: '240px' }}>
-              Learn More
-            </Button>
+            <SectionLink section="about">
+              {({ onClick, isSelect}) => (
+                <Button 
+                  bg='#00B1FF'
+                  fontSize={[4, 4, 4]}
+                  borderRadius={100}
+                  style={{ width: '240px' }}
+                  onClick={onClick}>
+                  Learn More
+                </Button>
+              )}
+            </SectionLink>
+            
             
             <Flex alignItems="center" justifyContent="center" flexWrap="wrap">
               {/* socialLinks.map(({ id, ...rest }) => (
