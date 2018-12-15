@@ -10,7 +10,7 @@ const colors = {
   primaryDark: '#222222',
 
   // secondary: '#ff4081',
-  secondary: '#ff0000',
+  secondary: '#00B1FF',
   // secondaryLight: '#ff79b0',
   secondaryLight: '#00B1FF',
   // secondaryDark: '#c60055',

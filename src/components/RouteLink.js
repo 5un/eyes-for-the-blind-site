@@ -7,6 +7,8 @@ const LinkAnimated = styled.span`
   text-decoration: none;
   position: relative;
   margin-bottom: 0;
+  margin-left: 10px;
+  margin-right: 10px;
   padding-bottom: 5px;
   color: white;
   border-bottom: ${props => `${props.borderWidth} solid transparent`};

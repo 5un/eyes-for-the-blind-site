@@ -85,12 +85,14 @@ const About = () => (
           <React.Fragment>
             <Section.Header name={aboutSectionTitle} icon="" label="person" />
             <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
-              <Box width={[1, 1, 3 / 6]} px={[1, 2, 4]}>
+              <Box width={[1, 1, 3 / 6]}>
                 <Fade bottom>
-                  <ReactMarkdown
-                    source={aboutMe.childMarkdownRemark.rawMarkdownBody}
-                    renderers={markdownRenderer}
-                  />
+                  <div style={{ paddingRight: '10px' }}>
+                    <ReactMarkdown
+                      source={aboutMe.childMarkdownRemark.rawMarkdownBody}
+                      renderers={markdownRenderer}
+                    />
+                  </div>
                 </Fade>
               </Box>
 
@@ -111,10 +113,14 @@ const About = () => (
                 </Fade>
               </Box>
             </Flex>
-            <ReactMarkdown
-              source={extendedAboutContent.childMarkdownRemark.rawMarkdownBody}
-              renderers={markdownRenderer}
-            />
+            <Flex justifyContent="center" alignItems="center" flexWrap="wrap">
+              <Box width={[1, 1, 1]}>
+                <ReactMarkdown
+                  source={extendedAboutContent.childMarkdownRemark.rawMarkdownBody}
+                  renderers={markdownRenderer}
+                />
+              </Box>
+            </Flex>
           </React.Fragment>
         );
       }}
