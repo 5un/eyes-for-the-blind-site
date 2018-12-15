@@ -52,6 +52,7 @@ const TeamMembers = () => (
             teamMembers {
               name
               title
+              linkedInUrl
               image {
                 title
                 image: resize(width: 200, quality: 100) {
@@ -71,15 +72,17 @@ const TeamMembers = () => (
           />
           <Box>
             {contentfulAbout.teamMembers.map(member => (
-              <TeamMember width={[1, 1/3, 1/6]}>
-                <Image src={member.image.image.src} width="200px" height="auto" style={{ borderRadius: '100px', margin: 'auto' }}/>
-                <div style={{ textAlign: 'center' }}>
-                  <h3>{member.name}</h3>
-                  <div>
-                    {member.title}
+              <a href={member.linkedInUrl}>
+                <TeamMember width={[1, 1/3, 1/6]}>
+                  <Image src={member.image.image.src} width="200px" height="auto" style={{ borderRadius: '100px', margin: 'auto' }}/>
+                  <div style={{ textAlign: 'center' }}>
+                    <h3>{member.name}</h3>
+                    <div>
+                      {member.title}
+                    </div>
                   </div>
-                </div>
-              </TeamMember>
+                </TeamMember>
+              </a>
             ))}
             
           </Box>
